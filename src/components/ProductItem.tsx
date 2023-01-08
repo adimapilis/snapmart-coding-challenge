@@ -59,8 +59,21 @@ const ProductButton = styled.button`
   font-weight:bold;
   font-size:15px;
 `
-const ProductItem = ({data}) => {
-  const { category, description, id, imageUrl, productName, unitPrice,} = data
+
+type DataTypes = {
+  category : string,
+  description: string,
+  id: string,
+  imageUrl: string,
+  productName: string,
+  unitPrice: number,
+}
+
+export interface DataProps{
+  data : DataTypes;
+}
+const ProductItem = ({data} : DataProps ) => {
+  const { category , description, id, imageUrl, productName, unitPrice} = data
   const { cart, setCart } = useContext(MainContext)
   const handleAddToCart = () => {
     const exist = cart?.find(each=> each.id==id)
@@ -75,7 +88,11 @@ const ProductItem = ({data}) => {
       imageUrl,
       quantity:1
     }
-    setCart(prev=> ([newItem,...prev]))
+    const newCart  = [
+      newItem,
+      ...cart
+    ]
+    setCart(newCart)
   }
   return (
     <ProductItemContainer>

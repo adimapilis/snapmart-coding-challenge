@@ -37,16 +37,16 @@ const CategoryListText = styled.span`
 `
 
 
-const uniqueCategory = (array) => {
+const uniqueCategory = (array : any) => {
   array = data.map(each => each.category)
-  return array.sort().filter((item, pos, ary) => {
+  return array.sort().filter((item : object, pos : number, ary : []) => {
       return !pos || item != ary[pos - 1];
   });
 }
 
 const Category = () => {
   const { category, setCategory } = useContext(MainContext)
-  const categories = uniqueCategory(data)
+  const categories : any[]= uniqueCategory(data)
   return (
     <CategoryContainer>
       <CategoryListItem onClick={()=>setCategory(categories)}>

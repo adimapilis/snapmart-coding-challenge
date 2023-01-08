@@ -41,7 +41,19 @@ padding:5px 10px;
 `
 const CartItemQuantity = styled.span`
 `
-const CartItem = ({data}) => {
+
+type DataType = {
+  productName: string,
+  id: string,
+  unitPrice: number,
+  imageUrl: string,
+  quantity: number,
+}
+ 
+export interface DataProps {
+  data: DataType;
+}
+const CartItem = ({data} : DataProps) => {
   const { productName, id, unitPrice, imageUrl, quantity } = data
   const { cart, setCart } = useContext(MainContext)
 

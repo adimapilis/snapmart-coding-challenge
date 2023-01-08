@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { MainContext } from './contexts/MainContext.tsx'
+import { MainContext } from './contexts/MainContext'
 import Navbar from './components/Navbar'
 import styled from 'styled-components';
 import './App.css'

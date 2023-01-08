@@ -1,13 +1,32 @@
-import React, {useEffect, useState} from "react"
-import { data } from '../assets/data.json'
+import React, {useEffect, useState, Dispatch, SetStateAction} from "react"
 
-const MainContext = React.createContext();
+type Cart = {
+    productName: string,
+    id: string,
+    unitPrice: number,
+    imageUrl: string,
+    quantity: number,
+}
 
-function MainContextProvider({children}) { 
+type MainContextType = {
+    category: string[],
+    setCategory: Dispatch<SetStateAction<string[]>>,
+    search: string,
+    setSearch: Dispatch<SetStateAction<string>>,
+    sort: boolean,
+    setSort: Dispatch<SetStateAction<boolean>>,
+    cart: Cart[],
+    setCart: Dispatch<SetStateAction<Cart[]>>
+}
+
+
+const MainContext = React.createContext({} as MainContextType);
+
+function MainContextProvider({children}: {children: React.ReactNode}) { 
     const [category, setCategory] = useState(['automotive', 'cloths', 'furniture', 'gadgets', 'groceries', 'lifestyle', 'toys'])
     const [search, setSearch] = useState("")
     const [sort, setSort] = useState(true)
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem("snapmart"))||[])
+    const [cart, setCart] = useState<Cart[]>(JSON.parse(localStorage.getItem("snapmart") as string)||[])
     
     useEffect(() => {
     localStorage.setItem("snapmart", JSON.stringify(cart))
